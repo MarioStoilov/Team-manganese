@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConsoleApplication1;
 
 
 // kolko me cepi glavata, piqna sym ot vcera, sha vyrna li vodkata ili sha ya poema, dajte mi bira, da iztrezneyaaa
 
-namespace Balloons_Pops_game
+namespace BalloonsPop
 {
     class baloni
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Balloons_Pops_game
+namespace BalloonsPop
 {
     public class klasacia : IComparable<klasacia>
     {

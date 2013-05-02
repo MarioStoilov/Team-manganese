@@ -1,0 +1,4 @@
+Refactor baloni.cs - dillian
+Refactor StringExtensions.cs - Kalyona
+Generate unit tests - Plamen
+Implement scoreBoard - Mario

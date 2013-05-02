@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplication1
+namespace BalloonsPop
 {
     static class StringExtensions
     {

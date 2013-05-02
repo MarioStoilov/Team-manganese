@@ -1,0 +1,5 @@
+C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\BallonsPop.csprojResolveAssemblyReference.cache
+C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\bin\Debug\BalloonsPop.exe
+C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\bin\Debug\BalloonsPop.pdb
+C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\BalloonsPop.exe
+C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\BalloonsPop.pdb
