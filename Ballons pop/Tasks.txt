@@ -1,4 +1,4 @@
-Refactor baloni.cs - dillian
-Refactor StringExtensions.cs - Kalyona
+Refactor baloni.cs after it has been separated into other files - dillian
+Refactor StringExtensions.cs - Kaloyan
 Generate unit tests - Plamen
 Implement scoreBoard - Mario
