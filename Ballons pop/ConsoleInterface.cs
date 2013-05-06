@@ -8,5 +8,6 @@ namespace BalloonsPop
     class ConsoleInterface
     {
         //TODO: implement methods for the user to comunicate with the game trhough the console
+
     }
 }

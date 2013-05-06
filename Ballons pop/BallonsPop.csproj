@@ -59,9 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="baloni.cs" />
+    <Compile Include="Playground.cs" />
     <Compile Include="ConsoleInterface.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="klasacia.cs" />
+    <Compile Include="RandomGenerator.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
