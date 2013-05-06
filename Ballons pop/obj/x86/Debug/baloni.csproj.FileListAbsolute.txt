@@ -1,5 +1,0 @@
-C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\bin\Debug\ConsoleApplication1.exe
-C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\bin\Debug\ConsoleApplication1.pdb
-C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\baloni.csprojResolveAssemblyReference.cache
-C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\ConsoleApplication1.exe
-C:\Users\stoil_000\Documents\GitHub\Team-manganese\Ballons pop\obj\x86\Debug\ConsoleApplication1.pdb
