@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace BalloonsPop
 {
-    //gen -> GeneratePlayground
     class Playground
     {
         // const added
-        
-        public const int numberOfColors = 4;
+        public const int NumberOfColors = 4;
 
         // gen -> GeneratePlayground
         // temp -> playground
@@ -24,7 +22,7 @@ namespace BalloonsPop
             {
                 for (byte column = 0; column < columns; column++)
                 {
-                    byte balloonColor = (byte)RandomGenerator.GetNext(1, numberOfColors);
+                    byte balloonColor = (byte)RandomGenerator.GetNext(1, NumberOfColors);
                     playground[row, column] = balloonColor;
                 }
             }
@@ -35,26 +33,24 @@ namespace BalloonsPop
         // matrix -> playground
         // row -> currentRow
         // column -> currentCol
-        // searchedItem -> ................ Playground
-        // try catch -> new Method IsOnPlayground( ... ...) and bool isOnPlayground
-        static void CheckLeft(byte[,] playground, int currentRow, int currentColumn, int searchedItem)
+        // searchedItem -> searchedColor 
+        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
+        static void CheckLeft(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
         {
             int newRow = currentRow;
             int newColumn = currentColumn - 1;
             bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
-            //try
-            //{
-            if (isOnPlayground && playground[newRow, newColumn] == searchedItem)
+           
+            if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
             {
                 playground[newRow, newColumn] = 0;
-                CheckLeft(playground, newRow, newColumn, searchedItem);
+                CheckLeft(playground, newRow, newColumn, searchedColor);
             }
             else
             {
                 return;
             }
-            //}catch(IndexOutOfRangeException)
-            //    {return;} 
+           
         }
 
         // Aditionaly added method
@@ -72,87 +68,95 @@ namespace BalloonsPop
             }
         }
 
-        // checkRight -> 
+        // checkRight -> CheckRight
         // matrix -> playground
-        static void checkRight(byte[,] matrix, int row, int column, int searchedItem)
+        // row -> currentRow
+        // column -> currentCol
+        // searchedItem -> searchedColor 
+        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
+        static void CheckRight(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
         {
-            int newRow = row;
-            int newColumn = column + 1;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
+            int newRow = currentRow;
+            int newColumn = currentColumn + 1;
+            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+           
+                if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
                 {
-                    matrix[newRow, newColumn] = 0;
-                    checkRight(matrix, newRow, newColumn, searchedItem);
+                    playground[newRow, newColumn] = 0;
+                    CheckRight(playground, newRow, newColumn, searchedColor);
                 }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
+                else
+                {
+                    return;
+                }
+        }
+
+        // checkUp -> CheckUp
+        // matrix -> playground
+        // row -> currentRow
+        // column -> currentCol
+        // searchedItem -> searchedColor 
+        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
+        static void CheckUp(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        {
+            int newRow = currentRow + 1;
+            int newColumn = currentColumn;
+            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+           
+                if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+                {
+                    playground[newRow, newColumn] = 0;
+                    CheckUp(playground, newRow, newColumn, searchedColor);
+                }
+                else
+                {
+                    return;
+                }
+        }
+
+        // checkDown -> CheckDown
+        // matrix -> playground
+        // row -> currentRow
+        // column -> currentCol
+        // searchedItem -> searchedColor 
+        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
+        static void CheckDown(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        {
+            int newRow = currentRow - 1;
+            int newColumn = currentColumn;
+            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+           
+                if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+                {
+                    playground[newRow, newColumn] = 0;
+                    CheckDown(playground, newRow, newColumn, searchedColor);
+                }
+                else
+                {
+                    return;
+                }
 
         }
 
-        // 
-        static void checkUp(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row + 1;
-            int newColumn = column;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    checkUp(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-        }
-
-        // 
-        static void checkDown(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row - 1;
-            int newColumn = column;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    checkDown(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-
-        }
-
-        // 
+        // change -> 
         public static bool change(byte[,] matrixToModify, int rowAtm, int columnAtm)
         {
             if (matrixToModify[rowAtm, columnAtm] == 0)
             {
                 return true;
             }
+
             byte searchedTarget = matrixToModify[rowAtm, columnAtm];
             matrixToModify[rowAtm, columnAtm] = 0;
             CheckLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            checkRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
 
-
-            checkUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            checkDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
             return false;
         }
 
-        // 
-       
-
-        
-
-       
+      
     }
 }
 
