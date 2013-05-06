@@ -287,7 +287,7 @@ namespace BalloonsPop
                             if (doit(matrix))
                             {
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
-                                if (topFive.signIfSkilled(userMoves))
+                                if (topFive.SignIfSkilled(userMoves))
                                 {
                                     sortAndPrintChartFive(topFive);
                                 }
