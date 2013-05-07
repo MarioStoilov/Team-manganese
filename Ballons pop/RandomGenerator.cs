@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BalloonsPop
 {
-    public static class RandomGenerator
+    internal static class RandomGenerator
     {
-        private static Random randomGenerator;
+        private static readonly Random randomGenerator;
 
         static RandomGenerator()
         {
             randomGenerator = new Random();
         }
 
-        public static int GetNext(int minValue, int maxValue)
+        internal static int GetNext(int minValue, int maxValue)
         {
             return randomGenerator.Next(minValue, maxValue + 1);
         }

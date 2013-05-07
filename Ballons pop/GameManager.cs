@@ -16,7 +16,7 @@ namespace BalloonsPop
         static void Main(string[] args)
         {
             string[,] topFive = new string[5, 2];
-            byte[,] matrix = Playground.GeneratePlayground(5, 10);
+            byte[,] matrix = Playground.GeneratePlayground(5, 10, 4);
 
             DrowPlayground(matrix);
             string temp = null;
@@ -30,7 +30,7 @@ namespace BalloonsPop
                 switch (temp)
                 {
                     case "RESTART":
-                        matrix = Playground.GeneratePlayground(5, 10);
+                        matrix = Playground.GeneratePlayground(5, 10, 4);
                         DrowPlayground(matrix);
                         userMoves = 0;
                         break;
@@ -51,7 +51,7 @@ namespace BalloonsPop
                             }
                             userColumn = int.Parse(temp[2].ToString());
 
-                            if (Playground.IsEmptyCell(matrix, userRow, userColumn))
+                            if (Playground.IsPositionEmpty(matrix, userRow, userColumn))
                             {
                                 Console.WriteLine("cannot pop missing ballon!");
                                 continue;
@@ -74,7 +74,7 @@ namespace BalloonsPop
                                 {
                                     Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
                                 }
-                                matrix = Playground.GeneratePlayground(5, 10);
+                                matrix = Playground.GeneratePlayground(5, 10, 4);
                                 userMoves = 0;
                             }
 
