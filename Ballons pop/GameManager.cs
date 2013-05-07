@@ -8,8 +8,10 @@ namespace BalloonsPop
     class GameManager
     {
         //TODO: implement the methods for managing the game
-       
-        // static void Main mast be in ConsoleInterface
+        // 1. The main method should not be here
+        // 2. The current main method should be split into smaller ones
+        // 3. Refactor the code
+        // 
         // temp - > userInput ??
         //else added
 
@@ -18,7 +20,7 @@ namespace BalloonsPop
             string[,] topFive = new string[5, 2];
             byte[,] matrix = Playground.GeneratePlayground(5, 10, 4);
 
-            DrowPlayground(matrix);
+            ConsoleRenderer.DrаwPlayground(matrix);
             string temp = null;
             int userMoves = 0;
             while (temp != "EXIT")
@@ -31,12 +33,12 @@ namespace BalloonsPop
                 {
                     case "RESTART":
                         matrix = Playground.GeneratePlayground(5, 10, 4);
-                        DrowPlayground(matrix);
+                        ConsoleRenderer.DrаwPlayground(matrix);
                         userMoves = 0;
                         break;
 
                     case "TOP":
-                        klasacia.sortAndPrintChartFive(topFive);
+                        TopScoresChart.sortAndPrintChartFive(topFive);
                         break;
 
                     default:
@@ -68,7 +70,7 @@ namespace BalloonsPop
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
                                 if (topFive.SignIfTopScoreArchived(userMoves))
                                 {
-                                    klasacia.sortAndPrintChartFive(topFive);
+                                    TopScoresChart.sortAndPrintChartFive(topFive);
                                 }
                                 else
                                 {
@@ -78,7 +80,7 @@ namespace BalloonsPop
                                 userMoves = 0;
                             }
 
-                            DrowPlayground(matrix);
+                            ConsoleRenderer.DrаwPlayground(matrix);
                             break;
                         }
                         else
@@ -91,65 +93,6 @@ namespace BalloonsPop
             Console.WriteLine("Good Bye! ");
         }
   
-        // method extracted
-        // matrix -> playground
-        // GetLongLength -> GetLength
-        // i -> row
-        // j -> col
-        private static void DrowPlayground(byte[,] playground)
-        {
-            int rows = playground.GetLength(0);
-            int columns = playground.GetLength(1);
-
-            DrawFirstRow(columns);
-            DrawHorizontalBorder(columns);
-
-            for (byte row = 0; row < rows; row++)
-            {
-                Console.Write(row + " | ");
-                DrawRowContent(playground, columns, row);
-                Console.WriteLine("| ");
-            }
-
-            DrawHorizontalBorder(columns);
-        }
-
-        // method extracted
-        private static void DrawRowContent(byte[,] playground, int columns, byte row)
-        {
-            for (byte col = 0; col < columns; col++)
-            {
-                if (playground[row, col] == 0)
-                {
-                    Console.Write("  ");
-                    continue;
-                }
-
-                Console.Write(playground[row, col] + " ");
-            }
-        }
-
-        // method extracted
-        private static void DrawFirstRow(int columns)
-        {
-            Console.Write("    ");
-            for (byte column = 0; column < columns; column++)
-            {
-                Console.Write(column + " ");
-            }
-
-            Console.WriteLine();
-        }
-
-        // method extracted
-        private static void DrawHorizontalBorder(int columns)
-        {
-            Console.Write("   ");     //some trinket stuff again
-            for (byte column = 0; column < columns * 2 + 1; column++)
-            {
-                Console.Write("-");
-            }
-            Console.WriteLine();
-        }
+        
     }
 }

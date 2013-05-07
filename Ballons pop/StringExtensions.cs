@@ -4,10 +4,9 @@ namespace BalloonsPop
 {
     static class StringExtensions
     {
-        //public override string ToString()
-        //{
-        //    return string.Format("");
-        //}
+        //TODO: This class is completely wrong. It serves to draw the top scores chart (which should be in the Console interface class)
+        // and calculates wether the current score should enter the chart (which should be done by the game manager or the chart itself)
+        // this needs to be split amongs the right classes and then removed
 
         public static bool SignIfTopScoreArchived(this string[,] chart, int points)
         {

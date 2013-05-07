@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace BalloonsPop
 {
-    public class klasacia : IComparable<klasacia>
+    public class TopScoresChart : IComparable<TopScoresChart>
     {
         public int Value;
         public string Name;
 
-        public klasacia(int value, string name)
+        public TopScoresChart(int value, string name)
         {
             Value = value;
             Name = name;
         }
 
-        public int CompareTo(klasacia other)
+        public int CompareTo(TopScoresChart other)
         {
             return Value.CompareTo(other.Value);
         }
@@ -23,7 +23,7 @@ namespace BalloonsPop
         public static void sortAndPrintChartFive(string[,] tableToSort)
         {
 
-            List<klasacia> klasirane = new List<klasacia>();
+            List<TopScoresChart> klasirane = new List<TopScoresChart>();
 
             for (int i = 0; i < 5; ++i)
             {
@@ -32,7 +32,7 @@ namespace BalloonsPop
                     break;
                 }
 
-                klasirane.Add(new klasacia(int.Parse(tableToSort[i, 0]), tableToSort[i, 1]));
+                klasirane.Add(new TopScoresChart(int.Parse(tableToSort[i, 0]), tableToSort[i, 1]));
 
             }
 
@@ -40,7 +40,7 @@ namespace BalloonsPop
             Console.WriteLine("---------TOP FIVE CHART-----------");
             for (int i = 0; i < klasirane.Count; ++i)
             {
-                klasacia slot = klasirane[i];
+                TopScoresChart slot = klasirane[i];
                 Console.WriteLine("{2}.   {0} with {1} moves.", slot.Name, slot.Value, i + 1);
             }
             Console.WriteLine("----------------------------------");

@@ -5,6 +5,6 @@ Refactor StringExtensions.cs - Kaloyan
 Refactor GameManager.cs - Kaloyan:
 	1. Implement the methods which manage the game
 Refactor ConsoleInterfaca - ****
-Extract methods for drawing the game in the console in a separate class-****
+Extract methods for drawing the game in the console in a separate class-Mario
 Generate unit tests - Plamen
 Implement scoreBoard - Mario
