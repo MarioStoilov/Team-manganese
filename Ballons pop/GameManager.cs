@@ -66,7 +66,7 @@ namespace BalloonsPop
                             if (Playground.IsPlaygroundEmpty(matrix))
                             {
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
-                                if (topFive.SignIfSkilled(userMoves))
+                                if (topFive.SignIfTopScoreArchived(userMoves))
                                 {
                                     klasacia.sortAndPrintChartFive(topFive);
                                 }

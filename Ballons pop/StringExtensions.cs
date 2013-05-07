@@ -9,43 +9,43 @@ namespace BalloonsPop
         //    return string.Format("");
         //}
 
-        public static bool SignIfSkilled(this string[,] chart, int points)
+        public static bool SignIfTopScoreArchived(this string[,] chart, int points)
         {
-            bool skilled = false;
-            int worstMoves = 0;
-            int worstMovesChartPosition = 0;
+            bool topScoreArchived = false;
+            int topScore = 0;
+            int topScoreChartPosition = 0;
             for (int i = 0; i < 5; i++)
             { 
                 if (chart[i, 0] == null)
                 {
                     Console.WriteLine("Type in your name.");
-                    string tempUserName = Console.ReadLine();
+                    string topScoreUser = Console.ReadLine();
                     chart[i, 0] = points.ToString();
-                    chart[i, 1] = tempUserName;
-                    skilled = true;
+                    chart[i, 1] = topScoreUser;
+                    topScoreArchived = true;
                     break;
                 }
             }
-            if (skilled == false) 
+            if (topScoreArchived == false) 
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    if (int.Parse(chart[i, 0]) > worstMoves)
+                    if (int.Parse(chart[i, 0]) > topScore)
                     {
-                        worstMovesChartPosition = i;
-                        worstMoves = int.Parse(chart[i, 0]);
+                        topScoreChartPosition = i;
+                        topScore = int.Parse(chart[i, 0]);
                     }
                 }
             }
-            if (points < worstMoves && skilled == false) 
+            if (points < topScore && topScoreArchived == false) 
             {
                 Console.WriteLine("Type in your name.");
-                string tempUserName = Console.ReadLine();
-                chart[worstMovesChartPosition, 0] = points.ToString();
-                chart[worstMovesChartPosition, 1] = tempUserName;
-                skilled = true;
+                string topScoreUser = Console.ReadLine();
+                chart[topScoreChartPosition, 0] = points.ToString();
+                chart[topScoreChartPosition, 1] = topScoreUser;
+                topScoreArchived = true;
             }
-            return skilled;
+            return topScoreArchived;
         }
     }
 }
