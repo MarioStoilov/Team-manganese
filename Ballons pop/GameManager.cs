@@ -58,11 +58,12 @@ namespace BalloonsPop
                             }
                             else
                             {
-                                Playground.VisitCell(matrix, userRow, userColumn);
+                                Playground.PopAtPosition(matrix, userRow, userColumn);
                             }
 
                             userMoves++;
-                            if (Playground.ReorderPlayground(matrix))
+                            Playground.ReorderPlayground(matrix);
+                            if (Playground.IsPlaygroundEmpty(matrix))
                             {
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
                                 if (topFive.SignIfSkilled(userMoves))

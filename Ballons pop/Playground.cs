@@ -146,13 +146,12 @@ namespace BalloonsPop
                 return true;
             }
 
-            VisitCell(playground, row, column);
             return false;
         }
   
         // method extracted
         // searchedTarget -> searchedColor
-        internal static void VisitCell(byte[,] playground, int row, int column)
+        internal static void PopAtPosition(byte[,] playground, int row, int column)
         {
             byte searchedColor = playground[row, column];
             playground[row, column] = 0;
@@ -163,46 +162,68 @@ namespace BalloonsPop
             CheckDown(playground, row, column, searchedColor);
         }
 
+        // added method
+        internal static bool IsPlaygroundEmpty(byte[,] playground)
+        {
+            bool isPlaygroundEmpty = true;
+            int rows = playground.GetLength(0);
+            int columns = playground.GetLength(1);
+            bool stop = false;
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < columns; col++)
+                {
+                    if (playground[row, col] != 0)
+                    {
+                        isPlaygroundEmpty = false;
+                        stop = true;
+                        break;
+                    }
+                }
+                if (stop)
+                {
+                    break;
+                }
+            }
+
+            return isPlaygroundEmpty;
+        }
+
         // doit ->  ReorderPlayground
         // i -> row
         // j -> col
         // columnLenght -> rows
         // added columns = playground.GetLength(1)
-        // TODO .........try catch -> new Method .................
-        // TODO .........new Method IsPlaygroundEmpty.................
-        internal static bool ReorderPlayground(byte[,] playground)
+        // Stack<byte> stek -> byte[] reorderedColumn
+        // try catch -> removed
+        // bool Method -> void Method
+        // new Method added IsPlaygroundEmpty
+        internal static void ReorderPlayground(byte[,] playground)
         {
-            bool isWinner = true;
-            Stack<byte> stek = new Stack<byte>();
+            
             int rows = playground.GetLength(0);
             int columns = playground.GetLength(1);
 
             for (int col = 0; col < columns; col++)
             {
-                for (int row = 0; row < rows; row++)
+                byte[] reorderedColumn = new byte[rows];
+                int currentRow = rows-1;
+                for (int row =rows-1; row >=0; row--)
                 {
                     if (playground[row, col] != 0)
                     {
-                        isWinner = false;
-                        stek.Push(playground[row, col]);
+                        reorderedColumn[currentRow] = playground[row, col];
+                        currentRow--;
                     }
                 }
 
-                for (int k = rows - 1; (k >= 0); k--)
+                for (int row = 0; row < rows; row++)
                 {
-                    try
-                    {
-                        playground[k, col] = stek.Pop();
-                    }
-                    catch (Exception)
-                    {
-                        playground[k, col] = 0;
-                    }
+                    playground[row, col] = reorderedColumn[row];
                 }
             }
-            return isWinner;
         }
-      
     }
 }
 
