@@ -8,12 +8,6 @@ namespace BalloonsPop
         // and calculates wether the current score should enter the chart (which should be done by the game manager or the chart itself)
         // this needs to be split amongs the right classes and then removed
 
-        /// <summary>
-        /// If the player archives top score this method adds players score to the top score list.
-        /// </summary>
-        /// <param name="chart">This is the chart with the top scores.</param>
-        /// <param name="points">Points of the player.</param>
-        /// <returns>The method returns is the score is added to the top score list.</returns>
         public static bool SignIfTopScoreArchived(this string[,] chart, int points)
         {
             bool topScoreArchived = false;
