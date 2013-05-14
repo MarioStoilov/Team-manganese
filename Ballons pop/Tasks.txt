@@ -1,10 +1,9 @@
 Refactor baloni.cs - dillian:
 	1. Swithc old methods with the new classes for managing the game
 	2. Switch old methods with new methods for comunication with the console
-Refactor StringExtensions.cs - Kaloyan
 Refactor GameManager.cs - Kaloyan:
 	1. Implement the methods which manage the game
 Refactor ConsoleInterfaca - ****
 Extract methods for drawing the game in the console in a separate class-Mario
 Generate unit tests - Plamen
-Implement scoreBoard - Mario
+Implement scoreBoard - Mario - done BUT NEEDS TESTING
