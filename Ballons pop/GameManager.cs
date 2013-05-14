@@ -17,7 +17,7 @@ namespace BalloonsPop
 
         static void Main(string[] args)
         {
-            string[,] topFive = new string[5, 2];
+            TopScoresChart topFive = new TopScoresChart(5);
             byte[,] matrix = Playground.GeneratePlayground(5, 10, 4);
 
             ConsoleRenderer.DrаwPlayground(matrix);
@@ -38,7 +38,7 @@ namespace BalloonsPop
                         break;
 
                     case "TOP":
-                        TopScoresChartEntry.sortAndPrintChartFive(topFive);
+                        ConsoleRenderer.DrawTopScoresChart(topFive);
                         break;
 
                     default:
@@ -68,9 +68,10 @@ namespace BalloonsPop
                             if (Playground.IsPlaygroundEmpty(matrix))
                             {
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
-                                if (topFive.SignIfTopScoreArchived(userMoves))
+                                if (topFive.CheckIfHighScoreIsAchieved(userMoves))
                                 {
-                                    TopScoresChartEntry.sortAndPrintChartFive(topFive);
+                                    TopScoresChartEntry newTopScore = ConsoleInterface.RequestInputForScoreBoard(userMoves);
+                                    topFive.AddScore(newTopScore);
                                 }
                                 else
                                 {

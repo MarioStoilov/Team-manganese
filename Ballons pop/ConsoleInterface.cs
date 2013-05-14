@@ -11,5 +11,12 @@ namespace BalloonsPop
         // 1. All game output should be here. The field rendering is an exclusion
         // 2. All user input should be handled by this class
 
+        public static TopScoresChartEntry RequestInputForScoreBoard(int score)
+        {
+            Console.Write("Type in your name: ");
+            string topScoreUser = Console.ReadLine();
+            return new TopScoresChartEntry(score, topScoreUser);
+        }
+
     }
 }

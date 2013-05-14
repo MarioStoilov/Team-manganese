@@ -72,7 +72,7 @@ namespace BalloonsPop
         /// Draws the top scores chart
         /// </summary>
         /// <param name="chart">The chart to draw</param>
-        public static void DraWTopScoresChart(TopScoresChart chart)
+        public static void DrawTopScoresChart(TopScoresChart chart)
         {
             Console.WriteLine("Top {0} scores:", chart.TopPlayers.Length);
             Console.WriteLine(chart.ToString());
