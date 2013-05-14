@@ -4,7 +4,7 @@ namespace BalloonsPop
 {
     static class StringExtensions
     {
-        //TODO: This class is completely wrong. It serves to draw the top scores chart (which should be in the Console interface class)
+        //TODO: This class is completely wrong. It serves to draw the top scores chart (which should be in the Console renderer class)
         // and calculates wether the current score should enter the chart (which should be done by the game manager or the chart itself)
         // this needs to be split amongs the right classes and then removed
 
@@ -16,6 +16,7 @@ namespace BalloonsPop
          /// <param name="points">Points of the player.</param>
          /// <returns>The method returns is the score is added to the top score list.</returns>
 
+        // depricated will be removed soon
         public static bool SignIfTopScoreArchived(this string[,] chart, int points)
         {
             bool topScoreArchived = false;

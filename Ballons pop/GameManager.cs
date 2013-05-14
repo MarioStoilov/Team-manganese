@@ -38,7 +38,7 @@ namespace BalloonsPop
                         break;
 
                     case "TOP":
-                        TopScoresChart.sortAndPrintChartFive(topFive);
+                        TopScoresChartEntry.sortAndPrintChartFive(topFive);
                         break;
 
                     default:
@@ -70,7 +70,7 @@ namespace BalloonsPop
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
                                 if (topFive.SignIfTopScoreArchived(userMoves))
                                 {
-                                    TopScoresChart.sortAndPrintChartFive(topFive);
+                                    TopScoresChartEntry.sortAndPrintChartFive(topFive);
                                 }
                                 else
                                 {

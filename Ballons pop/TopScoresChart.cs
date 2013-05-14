@@ -1,51 +1,135 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace BalloonsPop
 {
-    public class TopScoresChart : IComparable<TopScoresChart>
+    class TopScoresChart
     {
-        public int Value;
-        public string Name;
+        private TopScoresChartEntry[] topPlayers;
 
-        public TopScoresChart(int value, string name)
+        /// <summary>
+        /// The top players in the score board. 
+        /// </summary>
+        /// <remarks>The players are automatically sorted when the value is set</remarks>
+        public TopScoresChartEntry[] TopPlayers
         {
-            Value = value;
-            Name = name;
-        }
-
-        public int CompareTo(TopScoresChart other)
-        {
-            return Value.CompareTo(other.Value);
-        }
-
-        // 
-        public static void sortAndPrintChartFive(string[,] tableToSort)
-        {
-
-            List<TopScoresChart> klasirane = new List<TopScoresChart>();
-
-            for (int i = 0; i < 5; ++i)
+            get
             {
-                if (tableToSort[i, 0] == null)
+                return this.topPlayers;
+            }
+            private set
+            {
+                this.topPlayers = value;
+            }
+        }
+
+        /// <summary>
+        /// Creates a scoreboard with capacity of 5 entries(default)
+        /// </summary>
+        public TopScoresChart()
+        {
+            this.TopPlayers = new TopScoresChartEntry[5];
+        }
+
+        /// <summary>
+        /// Creates a scoreboard with specified capacity
+        /// </summary>
+        /// <param name="capacity">The maximal number of entries in the scoreboard</param>
+        public TopScoresChart(byte capacity)
+        {
+            this.TopPlayers = new TopScoresChartEntry[capacity];
+        }
+
+        private void SortScores()
+        {
+            //sort in DESCENDING order
+            Array.Sort(this.TopPlayers);
+            Array.Reverse(this.TopPlayers);
+        }
+
+        /// <summary>
+        /// Check if the given score should be added in the chart
+        /// </summary>
+        /// <param name="score">The score to check</param>
+        public bool CheckIfHighScoreIsAchieved(int score)
+        {
+            bool highScoreAchived=false;
+            if (Array.IndexOf(this.TopPlayers, null)!=-1)
+            {
+                highScoreAchived=true;
+            }
+            else
+            {
+                highScoreAchived = Array.Exists(this.TopPlayers, entry => entry.Value < score);
+            }
+             
+
+            return highScoreAchived;
+        }
+
+        /// <summary>
+        /// Adds the entry to the scoreboard if the it's score is higher than any of the entries 
+        /// </summary>
+        /// <param name="newEntry">The entry to add</param>
+        /// <returns>Wether the score was added or not</returns>
+        public bool AddScore(TopScoresChartEntry newEntry)
+        {
+            if (newEntry==null)
+            {
+                throw new ArgumentNullException("Entry must not be null!");
+            }
+            bool entryShouldBeAdded = this.CheckIfHighScoreIsAchieved(newEntry.Value);
+            if (entryShouldBeAdded)
+            {
+                this.AddEntry(newEntry);
+                this.SortScores();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        private void AddEntry(TopScoresChartEntry newEntry)
+        {
+            int indexOfEmptyEntry = Array.IndexOf(this.TopPlayers, null);
+            //check if chart is full
+            if (indexOfEmptyEntry != -1) //chart is not full, we can freely add the entry
+            {
+                this.TopPlayers[indexOfEmptyEntry] = newEntry;
+            }
+            else // chart is full and we need to replace an entry
+            {
+                int indexToReplace = -1;
+                for (int i = 0; i < TopPlayers.Length; i++)
                 {
-                    break;
+                    if (TopPlayers[i].Value<=newEntry.Value)
+                    {
+                        indexToReplace = i;
+                        break;
+                    }
                 }
-
-                klasirane.Add(new TopScoresChart(int.Parse(tableToSort[i, 0]), tableToSort[i, 1]));
-
+                // move scores with 1 index down AFTER the point of insertion
+                for (int i = indexToReplace; i < this.TopPlayers.Length-1; i++)
+                {
+                    this.TopPlayers[i + 1] = this.TopPlayers[i];
+                }
+                this.TopPlayers[indexToReplace] = newEntry;
             }
+        }
 
-            klasirane.Sort();
-            Console.WriteLine("---------TOP FIVE CHART-----------");
-            for (int i = 0; i < klasirane.Count; ++i)
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+            for (int i = 0; i < this.TopPlayers.Length; i++)
             {
-                TopScoresChart slot = klasirane[i];
-                Console.WriteLine("{2}.   {0} with {1} moves.", slot.Name, slot.Value, i + 1);
+                output.AppendLine(String.Format("{0}. {1}", i + 1, this.TopPlayers[i]));
             }
-            Console.WriteLine("----------------------------------");
-
-
+            return output.ToString();
         }
     }
 }
