@@ -58,12 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleRenderer.cs" />
     <Compile Include="Playground.cs" />
     <Compile Include="ConsoleInterface.cs" />
     <Compile Include="GameManager.cs" />
-    <Compile Include="klasacia.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TopScoresChart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
