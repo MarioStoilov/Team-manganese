@@ -10,7 +10,7 @@ namespace BallonsPop.Tests
         [TestMethod]
         public void CheckIfHighScoreIsAchievedTest()
         {
-            TopScoresChart topscores = new TopScoresChart(5);
+            TopScoresChart topscores = new TopScoresChart();
             int score = 123;
             string name = "Kaloyan";
             TopScoresChartEntry player = new TopScoresChartEntry(score, name);
@@ -20,7 +20,7 @@ namespace BallonsPop.Tests
         [TestMethod]
         public void AddEntryTest()
         {
-            TopScoresChart topscores = new TopScoresChart(5);
+            TopScoresChart topscores = new TopScoresChart();
             int score = 123;
             string name = "Kaloyan";
             TopScoresChartEntry player = new TopScoresChartEntry(score, name);
@@ -31,7 +31,7 @@ namespace BallonsPop.Tests
         [TestMethod]
         public void ToStringTest()
         {
-            TopScoresChart topscores = new TopScoresChart(5);
+            TopScoresChart topscores = new TopScoresChart();
             int score = 123;
             string name = "Kaloyan";
             TopScoresChartEntry player = new TopScoresChartEntry(score, name);

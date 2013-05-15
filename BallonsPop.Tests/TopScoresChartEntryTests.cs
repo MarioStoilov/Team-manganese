@@ -29,6 +29,16 @@ namespace BallonsPop.Tests
         }
 
         [TestMethod]
+        public void CompareToNullTest()
+        {
+            int score = 123;
+            string name = "Kaloyan";
+            TopScoresChartEntry player = new TopScoresChartEntry(score, name);
+            int result = player.CompareTo(null);
+            Assert.AreEqual(result, -1);
+        }
+
+        [TestMethod]
         public void ToStringTest()
         {
             int score = 123;

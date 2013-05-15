@@ -16,7 +16,7 @@ namespace BalloonsPop
 
         public int CompareTo(TopScoresChartEntry other)
         {
-            if (other==null)
+            if (other == null)
             {
                 return -1;
             }
