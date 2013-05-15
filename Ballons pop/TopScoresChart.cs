@@ -62,7 +62,7 @@ namespace BalloonsPop
             }
             else
             {
-                highScoreAchived = Array.Exists(this.TopPlayers, entry => entry.Value < score);
+                highScoreAchived = Array.Exists(this.TopPlayers, entry => entry.Score < score);
             }
              
 
@@ -80,7 +80,7 @@ namespace BalloonsPop
             {
                 throw new ArgumentNullException("Entry must not be null!");
             }
-            bool entryShouldBeAdded = this.CheckIfHighScoreIsAchieved(newEntry.Value);
+            bool entryShouldBeAdded = this.CheckIfHighScoreIsAchieved(newEntry.Score);
             if (entryShouldBeAdded)
             {
                 this.AddEntry(newEntry);
@@ -107,7 +107,7 @@ namespace BalloonsPop
                 int indexToReplace = -1;
                 for (int i = 0; i < TopPlayers.Length; i++)
                 {
-                    if (TopPlayers[i].Value<=newEntry.Value)
+                    if (TopPlayers[i].Score<=newEntry.Score)
                     {
                         indexToReplace = i;
                         break;

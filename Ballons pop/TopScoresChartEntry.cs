@@ -5,13 +5,13 @@ namespace BalloonsPop
 {
     public class TopScoresChartEntry : IComparable<TopScoresChartEntry>
     {
-        public int Value;
+        public int Score;
         public string Name;
 
-        public TopScoresChartEntry(int value, string name)
+        public TopScoresChartEntry(int score, string name)
         {
-            Value = value;
-            Name = name;
+            this.Score = score;
+            this.Name = name;
         }
 
         public int CompareTo(TopScoresChartEntry other)
@@ -20,12 +20,12 @@ namespace BalloonsPop
             {
                 return -1;
             }
-            return Value.CompareTo(other.Value);
+            return Score.CompareTo(other.Score);
         }
 
         public override string ToString()
         {
-            return String.Format("{0} with {1} moves.", this.Name, this.Value);
+            return String.Format("{0} with {1} moves.", this.Name, this.Score);
         }
     }
 }
