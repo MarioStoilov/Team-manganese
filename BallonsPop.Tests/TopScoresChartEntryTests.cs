@@ -33,11 +33,10 @@ namespace BallonsPop.Tests
         {
             int score = 123;
             string name = "Kaloyan";
-            TopScoresChartEntry player1 = new TopScoresChartEntry(score, name);
-            int scoreSP = 234;
-            string nameSP = "Petur";
-            TopScoresChartEntry player2 = new TopScoresChartEntry(scoreSP, nameSP);
-            Assert.IsFalse(player1.Score == player2.Score);
+            TopScoresChartEntry player = new TopScoresChartEntry(score, name);
+            string toStringReturn = "Kaloyan with 123 moves.";
+            string returnString = player.ToString();
+            Assert.AreEqual(toStringReturn, returnString);
         }
     }
 

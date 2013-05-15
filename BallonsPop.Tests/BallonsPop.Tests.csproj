@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="TopScoresChartEntryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopScoresChartTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ballons pop\BallonsPop.csproj">

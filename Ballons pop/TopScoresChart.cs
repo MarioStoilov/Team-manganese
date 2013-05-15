@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BalloonsPop
 {
-    class TopScoresChart
+    public class TopScoresChart
     {
         private TopScoresChartEntry[] topPlayers;
 
