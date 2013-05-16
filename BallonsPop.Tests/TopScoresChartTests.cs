@@ -8,13 +8,14 @@ namespace BallonsPop.Tests
     public class TopScoresChartTests
     {
         [TestMethod]
-        public void CheckIfHighScoreIsAchievedTest()
+        public void TopScoresChartEntryTest()
         {
             TopScoresChart topscores = new TopScoresChart();
             int score = 123;
             string name = "Kaloyan";
             TopScoresChartEntry player = new TopScoresChartEntry(score, name);
-            Assert.IsTrue(topscores.CheckIfHighScoreIsAchieved(player.Score));
+            topscores.AddScore(player);
+            Assert.IsTrue(topscores != null);
         }
 
         [TestMethod]
@@ -27,6 +28,53 @@ namespace BallonsPop.Tests
             topscores.AddScore(player);
             Assert.IsTrue(topscores != null);
         }
+
+        [TestMethod]
+        public void TopScoresChartCapacityTest()
+        {
+            byte chartCapacity = 6;
+            TopScoresChart topscores = new TopScoresChart(chartCapacity);
+            Assert.IsTrue(topscores != null);
+        }
+
+        [TestMethod]
+        public void CheckIfHighScoreIsAchievedTest()
+        {
+            TopScoresChart topscores = new TopScoresChart();
+            int score = 123;
+            int scoreToCheck = 1234;
+            string name = "Kaloyan";
+            TopScoresChartEntry player = new TopScoresChartEntry(score, name);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            bool scoreCheck = topscores.CheckIfHighScoreIsAchieved(scoreToCheck);
+            Assert.IsTrue(scoreCheck);
+        }
+
+        [TestMethod]
+        public void AddScoreFalceTest()
+        {
+            TopScoresChart topscores = new TopScoresChart();
+            int score = 123;
+            string name = "Kaloyan";
+            int scoreSecondPlayer = 12;
+            string nameSecondPLayer = "Petur";
+            TopScoresChartEntry secondPlayer = new TopScoresChartEntry(scoreSecondPlayer, nameSecondPLayer);
+            TopScoresChartEntry player = new TopScoresChartEntry(score, name);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(player);
+            topscores.AddScore(secondPlayer);
+            Assert.IsTrue(topscores != null);
+        }
+		
+		
+
 
         [TestMethod]
         public void ToStringTest()
