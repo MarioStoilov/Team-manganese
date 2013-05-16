@@ -12,10 +12,10 @@ namespace BalloonsPop
         // GetLongLength -> GetLength
         // i -> row
         // j -> col
-        public static void DrаwPlayground(byte[,] playground)
+        public static void DrаwPlayground(Playground playground)
         {
-            int rows = playground.GetLength(0);
-            int columns = playground.GetLength(1);
+            int rows = playground.Height;
+            int columns = playground.Width;
 
             DrawFirstRow(columns);
             DrawHorizontalBorder(columns);
@@ -31,7 +31,7 @@ namespace BalloonsPop
         }
 
         // method extracted
-        public static void DrawRowContent(byte[,] playground, int columns, byte row)
+        public static void DrawRowContent(Playground playground, int columns, byte row)
         {
             for (byte col = 0; col < columns; col++)
             {

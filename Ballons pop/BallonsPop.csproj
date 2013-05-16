@@ -62,6 +62,7 @@
     <Compile Include="Playground.cs" />
     <Compile Include="ConsoleInterface.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="TopScoresChart.cs" />
     <Compile Include="TopScoresChartEntry.cs" />

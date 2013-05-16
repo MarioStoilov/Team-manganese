@@ -4,29 +4,56 @@ namespace BalloonsPop
 {
     internal class Playground
     {
-        // gen -> GeneratePlayground
-        // temp -> playground
-        // randNumber -> use class RandomGenerator.GetNext
-        // tempByte -> balloonColor
-        internal static byte[,] GeneratePlayground(byte rows, byte columns, byte numberOfColors)
+
+        private byte[,] playGround;
+
+        public byte this[int i, int j]
         {
-            byte[,] playground = new byte[rows, columns];
+            get
+            {
+                return playGround[i, j];
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return this.playGround.GetLength(0);
+            }
+        }
+
+        public int Width
+        {
+            get
+            {
+                return this.playGround.GetLength(1);
+            }
+        }
+
+        /// <summary>
+        /// Creates an instance of the playgorund class
+        /// </summary>
+        /// <param name="rows">The rows in the playgorund</param>
+        /// <param name="columns">The columns in the playgorund</param>
+        /// <param name="numberOfColors">The number of different colors of the ballons in the playground</param>
+        internal Playground(byte rows, byte columns, byte numberOfColors)
+        {
+            this.playGround = new byte[rows, columns];
             for (byte row = 0; row < rows; row++)
             {
                 for (byte column = 0; column < columns; column++)
                 {
                     byte balloonColor = (byte)RandomGenerator.GetNext(1, numberOfColors);
-                    playground[row, column] = balloonColor;
+                    this.playGround[row, column] = balloonColor;
                 }
             }
-
-            return playground;
         }
 
         // change -> IsPositionEmpty
-        internal static bool IsPositionEmpty(byte[,] playground, int row, int column)
+        internal bool IsPositionEmpty(int row, int column)
         {
-            if (playground[row, column] == 0)
+            if (this.playGround[row, column] == 0)
             {
                 return true;
             }
@@ -36,29 +63,33 @@ namespace BalloonsPop
   
         // method extracted
         // searchedTarget -> searchedColor
-        internal static void PopAtPosition(byte[,] playground, int row, int column)
+
+        /// <summary>
+        /// Pops a ballon at the given position
+        /// </summary>
+        internal void PopAtPosition(int row, int column)
         {
-            byte searchedColor = playground[row, column];
-            playground[row, column] = 0;
-            CheckLeft(playground, row, column, searchedColor);
-            CheckRight(playground, row, column, searchedColor);
-            CheckUp(playground, row, column, searchedColor);
-            CheckDown(playground, row, column, searchedColor);
+            byte searchedColor = playGround[row, column];
+            playGround[row, column] = 0;
+            CheckLeft(row, column, searchedColor);
+            CheckRight(row, column, searchedColor);
+            CheckUp(row, column, searchedColor);
+            CheckDown(row, column, searchedColor);
         }
 
-        // added method
-        internal static bool IsPlaygroundEmpty(byte[,] playground)
+
+        internal bool IsPlaygroundEmpty()
         {
             bool isPlaygroundEmpty = true;
-            int rows = playground.GetLength(0);
-            int columns = playground.GetLength(1);
+            int rows = playGround.GetLength(0);
+            int columns = playGround.GetLength(1);
             bool stop = false;
 
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < columns; col++)
                 {
-                    if (playground[row, col] != 0)
+                    if (playGround[row, col] != 0)
                     {
                         isPlaygroundEmpty = false;
                         stop = true;
@@ -75,19 +106,13 @@ namespace BalloonsPop
             return isPlaygroundEmpty;
         }
 
-        // doit ->  ReorderPlayground
-        // i -> row
-        // j -> col
-        // columnLenght -> rows
-        // added columns = playground.GetLength(1)
-        // Stack<byte> stek -> byte[] reorderedColumn
-        // try catch -> removed
-        // bool Method -> void Method
-        // new Method added IsPlaygroundEmpty
-        internal static void ReorderPlayground(byte[,] playground)
+        /// <summary>
+        /// Moves the ballons down if there is an empty spot
+        /// </summary>
+        internal void ReorderPlayground()
         {
-            int rows = playground.GetLength(0);
-            int columns = playground.GetLength(1);
+            int rows = playGround.GetLength(0);
+            int columns = playGround.GetLength(1);
 
             for (int col = 0; col < columns; col++)
             {
@@ -95,36 +120,33 @@ namespace BalloonsPop
                 int currentRow = rows - 1;
                 for (int row = rows - 1; row >= 0; row--)
                 {
-                    if (playground[row, col] != 0)
+                    if (playGround[row, col] != 0)
                     {
-                        reorderedColumn[currentRow] = playground[row, col];
+                        reorderedColumn[currentRow] = playGround[row, col];
                         currentRow--;
                     }
                 }
 
                 for (int row = 0; row < rows; row++)
                 {
-                    playground[row, col] = reorderedColumn[row];
+                    playGround[row, col] = reorderedColumn[row];
                 }
             }
         }
 
-        // checkLeft -> CheckLeft
-        // matrix -> playground
-        // row -> currentRow
-        // column -> currentCol
-        // searchedItem -> searchedColor 
-        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
-        private static void CheckLeft(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        /// <summary>
+        /// Checks the left neighbour of a given baloon wether it's color is equal to the given one
+        /// </summary>
+        private void CheckLeft(int currentRow, int currentColumn, int searchedColor)
         {
             int newRow = currentRow;
             int newColumn = currentColumn - 1;
-            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+            bool isOnPlayground = IsOnPlayground(newRow, newColumn);
 
-            if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+            if (isOnPlayground && playGround[newRow, newColumn] == searchedColor)
             {
-                playground[newRow, newColumn] = 0;
-                CheckLeft(playground, newRow, newColumn, searchedColor);
+                playGround[newRow, newColumn] = 0;
+                CheckLeft(newRow, newColumn, searchedColor);
             }
             else
             {
@@ -132,11 +154,13 @@ namespace BalloonsPop
             }
         }
 
-        // Aditionaly added method
-        private static bool IsOnPlayground(byte[,] playground, int row, int column)
+        /// <summary>
+        /// Checks if the given position is in the playground
+        /// </summary>
+        public bool IsOnPlayground(int row, int column)
         {
-            int rows = playground.GetLength(0);
-            int columns = playground.GetLength(1);
+            int rows = playGround.GetLength(0);
+            int columns = playGround.GetLength(1);
             if ((row >= 0 && row < rows) && (column >= 0 && column < columns))
             {
                 return true;
@@ -147,22 +171,19 @@ namespace BalloonsPop
             }
         }
 
-        // checkRight -> CheckRight
-        // matrix -> playground
-        // row -> currentRow
-        // column -> currentCol
-        // searchedItem -> searchedColor 
-        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
-        private static void CheckRight(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        /// <summary>
+        /// Checks the right neighbour of a given baloon wether it's color is equal to the given one
+        /// </summary>
+        private void CheckRight(int currentRow, int currentColumn, int searchedColor)
         {
             int newRow = currentRow;
             int newColumn = currentColumn + 1;
-            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+            bool isOnPlayground = IsOnPlayground(newRow, newColumn);
 
-            if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+            if (isOnPlayground && playGround[newRow, newColumn] == searchedColor)
             {
-                playground[newRow, newColumn] = 0;
-                CheckRight(playground, newRow, newColumn, searchedColor);
+                playGround[newRow, newColumn] = 0;
+                CheckRight(newRow, newColumn, searchedColor);
             }
             else
             {
@@ -170,22 +191,19 @@ namespace BalloonsPop
             }
         }
 
-        // checkUp -> CheckUp
-        // matrix -> playground
-        // row -> currentRow
-        // column -> currentCol
-        // searchedItem -> searchedColor 
-        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
-        private static void CheckUp(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        /// <summary>
+        /// Checks the top neighbour of a given baloon wether it's color is equal to the given one
+        /// </summary>
+        private void CheckUp(int currentRow, int currentColumn, int searchedColor)
         {
             int newRow = currentRow + 1;
             int newColumn = currentColumn;
-            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+            bool isOnPlayground = IsOnPlayground(newRow, newColumn);
 
-            if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+            if (isOnPlayground && playGround[newRow, newColumn] == searchedColor)
             {
-                playground[newRow, newColumn] = 0;
-                CheckUp(playground, newRow, newColumn, searchedColor);
+                playGround[newRow, newColumn] = 0;
+                CheckUp(newRow, newColumn, searchedColor);
             }
             else
             {
@@ -193,22 +211,19 @@ namespace BalloonsPop
             }
         }
 
-        // checkDown -> CheckDown
-        // matrix -> playground
-        // row -> currentRow
-        // column -> currentCol
-        // searchedItem -> searchedColor 
-        // try catch -> new Method IsOnPlayground( ... ) and bool isOnPlayground
-        private static void CheckDown(byte[,] playground, int currentRow, int currentColumn, int searchedColor)
+        /// <summary>
+        /// Checks the bottom neighbour of a given baloon wether it's color is equal to the given one
+        /// </summary>
+        private void CheckDown(int currentRow, int currentColumn, int searchedColor)
         {
             int newRow = currentRow - 1;
             int newColumn = currentColumn;
-            bool isOnPlayground = IsOnPlayground(playground, newRow, newColumn);
+            bool isOnPlayground = IsOnPlayground(newRow, newColumn);
 
-            if (isOnPlayground && playground[newRow, newColumn] == searchedColor)
+            if (isOnPlayground && playGround[newRow, newColumn] == searchedColor)
             {
-                playground[newRow, newColumn] = 0;
-                CheckDown(playground, newRow, newColumn, searchedColor);
+                playGround[newRow, newColumn] = 0;
+                CheckDown(newRow, newColumn, searchedColor);
             }
             else
             {

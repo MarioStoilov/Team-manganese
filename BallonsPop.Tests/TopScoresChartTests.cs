@@ -72,6 +72,28 @@ namespace BallonsPop.Tests
             topscores.AddScore(secondPlayer);
             Assert.IsTrue(topscores != null);
         }
+
+        [TestMethod]
+        public void TestAddingScoreWhenChartIsFull()
+        {
+            TopScoresChart chart = new TopScoresChart(3);
+            chart.AddScore(new TopScoresChartEntry(4, "Stamat"));
+            chart.AddScore(new TopScoresChartEntry(6, "Sulio"));
+            chart.AddScore(new TopScoresChartEntry(3, "Pulio"));
+            TopScoresChartEntry newPlayer = new TopScoresChartEntry(5, "Stamat");
+            chart.AddScore(newPlayer);
+            Assert.AreEqual(newPlayer, chart.TopPlayers[1]);
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestAddingNullScore()
+        {
+            TopScoresChart chart = new TopScoresChart(3);
+            chart.AddScore(null);
+
+        }
 		
 		
 
