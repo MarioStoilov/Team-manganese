@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
 
 namespace BalloonsPop
 {
     public class TopScoresChartEntry : IComparable<TopScoresChartEntry>
     {
-        public int Score;
-        public string Name;
+        public int Score { get; set; }
+
+        public string Name { get; set; }
 
         public TopScoresChartEntry(int score, string name)
         {
@@ -20,6 +20,7 @@ namespace BalloonsPop
             {
                 return -1;
             }
+
             return Score.CompareTo(other.Score);
         }
 

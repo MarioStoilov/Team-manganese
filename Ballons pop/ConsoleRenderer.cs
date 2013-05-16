@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BalloonsPop
 {
     static class ConsoleRenderer
     {
-        // method extracted
-        // matrix -> playground
-        // GetLongLength -> GetLength
-        // i -> row
-        // j -> col
         public static void DrаwPlayground(Playground playground)
         {
             int rows = playground.Height;
@@ -22,7 +15,7 @@ namespace BalloonsPop
 
             for (byte row = 0; row < rows; row++)
             {
-                Console.Write(row + " | ");
+                Console.Write("{0} | ", row);
                 DrawRowContent(playground, columns, row);
                 Console.WriteLine("| ");
             }
@@ -30,10 +23,9 @@ namespace BalloonsPop
             DrawHorizontalBorder(columns);
         }
 
-        // method extracted
-        public static void DrawRowContent(Playground playground, int columns, byte row)
+        public static void DrawRowContent(Playground playground, int columns, int row)
         {
-            for (byte col = 0; col < columns; col++)
+            for (int col = 0; col < columns; col++)
             {
                 if (playground[row, col] == 0)
                 {
@@ -41,31 +33,25 @@ namespace BalloonsPop
                     continue;
                 }
 
-                Console.Write(playground[row, col] + " ");
+                Console.Write("{0} ", playground[row, col]);
             }
         }
 
-        // method extracted
         public static void DrawFirstRow(int columns)
         {
             Console.Write("    ");
             for (byte column = 0; column < columns; column++)
             {
-                Console.Write(column + " ");
+                Console.Write("{0} ", column);
             }
 
             Console.WriteLine();
         }
 
-        // method extracted
         public static void DrawHorizontalBorder(int columns)
         {
-            Console.Write("   ");     //some trinket stuff again
-            for (byte column = 0; column < columns * 2 + 1; column++)
-            {
-                Console.Write("-");
-            }
-            Console.WriteLine();
+            string border = new string('-', (columns * 2 + 1));
+            Console.WriteLine("   {0}", border);
         }
 
         /// <summary>

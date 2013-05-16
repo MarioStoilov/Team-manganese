@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -19,6 +18,7 @@ namespace BalloonsPop
             {
                 return this.topPlayers;
             }
+
             private set
             {
                 this.topPlayers = value;
@@ -64,7 +64,6 @@ namespace BalloonsPop
             {
                 highScoreAchived = Array.Exists(this.TopPlayers, entry => entry.Score < score);
             }
-             
 
             return highScoreAchived;
         }
@@ -73,13 +72,14 @@ namespace BalloonsPop
         /// Adds the entry to the scoreboard if the it's score is higher than any of the entries 
         /// </summary>
         /// <param name="newEntry">The entry to add</param>
-        /// <returns>Wether the score was added or not</returns>
+        /// <returns>Whether the score was added or not</returns>
         public bool AddScore(TopScoresChartEntry newEntry)
         {
             if (newEntry==null)
             {
                 throw new ArgumentNullException("Entry must not be null!");
             }
+
             bool entryShouldBeAdded = this.CheckIfHighScoreIsAchieved(newEntry.Score);
             if (entryShouldBeAdded)
             {
@@ -91,21 +91,20 @@ namespace BalloonsPop
             {
                 return false;
             }
-
         }
 
         private void AddEntry(TopScoresChartEntry newEntry)
         {
             int indexOfEmptyEntry = Array.IndexOf(this.TopPlayers, null);
-            //check if chart is full
-            if (indexOfEmptyEntry != -1) //chart is not full, we can freely add the entry
+            ////check if chart is full
+            if (indexOfEmptyEntry != -1) ////chart is not full, we can freely add the entry
             {
                 this.TopPlayers[indexOfEmptyEntry] = newEntry;
             }
-            else // chart is full and we need to replace an entry
+            else ////chart is full and we need to replace an entry
             {
                 int indexToReplace = -1;
-                for (int i = 0; i < TopPlayers.Length; i++)
+                for (int i = 0; i < this.TopPlayers.Length; i++)
                 {
                     if (TopPlayers[i].Score<=newEntry.Score)
                     {
@@ -113,11 +112,13 @@ namespace BalloonsPop
                         break;
                     }
                 }
-                // move scores with 1 index down AFTER the point of insertion
+
+                //// move scores with 1 index down AFTER the point of insertion
                 for (int i = indexToReplace; i < this.TopPlayers.Length-1; i++)
                 {
                     this.TopPlayers[i + 1] = this.TopPlayers[i];
                 }
+
                 this.TopPlayers[indexToReplace] = newEntry;
             }
         }
@@ -129,6 +130,7 @@ namespace BalloonsPop
             {
                 output.AppendLine(String.Format("{0}. {1}", i + 1, this.TopPlayers[i]));
             }
+
             return output.ToString();
         }
     }

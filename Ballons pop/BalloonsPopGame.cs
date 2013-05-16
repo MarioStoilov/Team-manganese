@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BalloonsPop
 {
-    class Program
+    class BalloonsPopGame
     {
         static void Main(string[] args)
         {
@@ -21,7 +19,7 @@ namespace BalloonsPop
                 switch (userInput)
                 {
                     case "RESTART":
-                        RestartGame(ref gameManager, ref gameManager.PlayGround);
+                       gameManager = RestartGame(); 
                         break;
 
                     case "TOP":
@@ -54,7 +52,7 @@ namespace BalloonsPop
                             gameManager.PlayGround.ReorderPlayground();
                             if (gameManager.PlayGround.IsPlaygroundEmpty())
                             {
-                                EndGame(topFive, ref gameManager, ref gameManager.PlayGround);
+                                gameManager = EndGame(topFive, gameManager);
                             }
 
                             ConsoleRenderer.DrаwPlayground(gameManager.PlayGround);
@@ -67,10 +65,11 @@ namespace BalloonsPop
                         }
                 }
             }
+
             Console.WriteLine("Good Bye! ");
         }
 
-        private static void EndGame(TopScoresChart topFive, ref GameManager gameManager, ref Playground playground)
+        private static GameManager EndGame(TopScoresChart topFive, GameManager gameManager)
         {
             Console.WriteLine("Gratz ! You completed it in {0} moves.", gameManager.UserMoves);
             if (topFive.CheckIfHighScoreIsAchieved(gameManager.UserMoves))
@@ -82,15 +81,13 @@ namespace BalloonsPop
             {
                 Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
             }
-            playground = new Playground(5, 10, 4);
-            gameManager = new GameManager();
+
+            return new GameManager();
         }
 
-        private static void RestartGame(ref GameManager gameManager, ref Playground playground)
+        private static GameManager RestartGame()
         {
-            playground = new Playground(5, 10, 4);
-            ConsoleRenderer.DrаwPlayground(playground);
-            gameManager = new GameManager();
+            return new GameManager();
         }
     }
 }

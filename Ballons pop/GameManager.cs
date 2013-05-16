@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BalloonsPop
 {
@@ -10,6 +8,12 @@ namespace BalloonsPop
     /// </summary>
     class GameManager
     {
+        private const int PLAYGROUND_ROWS = 5;
+
+        private const int PLAYGROUND_COLUMNS = 10;
+
+        private const int BALLOON_COLORS_COUNT = 4;
+
         public int UserMoves
         {
             get;
@@ -19,13 +23,13 @@ namespace BalloonsPop
         public Playground PlayGround
         {
             get;
-            private set;
+            set;
         }
 
         public GameManager()
         {
             this.UserMoves = 0;
-            this.PlayGround = new Playground(5, 10, 4);
+            this.PlayGround = new Playground(PLAYGROUND_ROWS, PLAYGROUND_COLUMNS, BALLOON_COLORS_COUNT);
         }
 
         public void PopAtPosition(int row, int column)
@@ -33,6 +37,5 @@ namespace BalloonsPop
             UserMoves++;
             this.PlayGround.PopAtPosition(row, column);
         }
-        
     }
 }
