@@ -35,7 +35,7 @@ namespace BallonsPop.Tests
             string name = "Kaloyan";
             TopScoresChartEntry player = new TopScoresChartEntry(score, name);
             int result = player.CompareTo(null);
-            Assert.AreEqual(result, -1);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]

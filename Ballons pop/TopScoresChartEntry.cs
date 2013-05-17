@@ -18,10 +18,10 @@ namespace BalloonsPop
         {
             if (other == null)
             {
-                return -1;
+                return 1;
             }
 
-            return Score.CompareTo(other.Score);
+            return Score.CompareTo(other.Score)*-1;
         }
 
         public override string ToString()

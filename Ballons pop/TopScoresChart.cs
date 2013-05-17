@@ -6,6 +6,8 @@ namespace BalloonsPop
 {
     public class TopScoresChart
     {
+        private const int TOP_SCORES_DEFAULT_CAPACITY = 5;
+
         private TopScoresChartEntry[] topPlayers;
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace BalloonsPop
         /// </summary>
         public TopScoresChart()
         {
-            this.TopPlayers = new TopScoresChartEntry[5];
+            this.TopPlayers = new TopScoresChartEntry[TOP_SCORES_DEFAULT_CAPACITY];
         }
 
         /// <summary>

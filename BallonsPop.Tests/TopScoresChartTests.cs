@@ -82,7 +82,7 @@ namespace BallonsPop.Tests
             chart.AddScore(new TopScoresChartEntry(3, "Pulio"));
             TopScoresChartEntry newPlayer = new TopScoresChartEntry(5, "Stamat");
             chart.AddScore(newPlayer);
-            Assert.AreEqual(newPlayer, chart.TopPlayers[1]);
+            Assert.AreEqual(newPlayer, chart.TopPlayers[2]);
             
         }
 
