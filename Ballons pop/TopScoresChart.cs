@@ -28,18 +28,10 @@ namespace BalloonsPop
         }
 
         /// <summary>
-        /// Creates a scoreboard with capacity of 5 entries(default)
-        /// </summary>
-        public TopScoresChart()
-        {
-            this.TopPlayers = new TopScoresChartEntry[TOP_SCORES_DEFAULT_CAPACITY];
-        }
-
-        /// <summary>
         /// Creates a scoreboard with specified capacity
         /// </summary>
-        /// <param name="capacity">The maximal number of entries in the scoreboard</param>
-        public TopScoresChart(byte capacity)
+        /// <param name="capacity">The maximal number of entries in the scoreboard. Default value is 5</param>
+        public TopScoresChart(byte capacity=TOP_SCORES_DEFAULT_CAPACITY)
         {
             this.TopPlayers = new TopScoresChartEntry[capacity];
         }
